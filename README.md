@@ -5,7 +5,7 @@ Dependancy:
 (https://processing.org/tutorials/eclipse/)
 core.jar
 
-Note:
-PApplet.main( new String[] { "--present", "NameOfClass" });
-is required when going full screen on MacOS, otherwise:
-PApplet.main(new String[] {"NameOfClass"});
+Note: <br>
+PApplet.main( new String[] { "--present", "NameOfClass" }); <br>
+is required when going full screen on MacOS, otherwise: <br>
+PApplet.main(new String[] {"NameOfClass"}); <br>
