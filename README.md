@@ -12,3 +12,10 @@ PApplet.main(new String[] {"NameOfClass"}); <br>
 
 <br>JavaDoc
 <br>http://processing.github.io/processing-javadocs/core/<br>
+
+<br>Relevant examples:
+<p>
+Music visualizations: 
+<br>https://github.com/blyk/Music-Visualization
+<br>https://github.com/samuellapointe/ProcessingCubes
+</p>
