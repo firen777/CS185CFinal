@@ -19,3 +19,6 @@ Music visualizations:
 <br>https://github.com/blyk/Music-Visualization
 <br>https://github.com/samuellapointe/ProcessingCubes
 </p>
+<p>Stickman example:
+<br>http://studio.processingtogether.com/sp/pad/export/ro.9ozYNbweyOpjT/latest
+</p>
