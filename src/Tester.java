@@ -12,78 +12,23 @@ import processing.core.PApplet;
  */
 public class Tester extends PApplet{
 	
-	private int bodyX = 200;
-	private int bodyY = 100;
-	private int bodyW = 100;
-	private int bodyH = 300;
+	private RagDoll doll;
 	
+	public int bodyX = 200;
+	public int bodyY = 100;
+	public int bodyW = 100;
+	public int bodyH = 300;
 	
-	
-	/**
-	 * @return the bodyX
-	 */
-	public int getBodyX() {
-		return bodyX;
-	}
-
-	/**
-	 * @param bodyX the bodyX to set
-	 */
-	public void setBodyX(int bodyX) {
-		this.bodyX = bodyX;
-	}
-
-	/**
-	 * @return the bodyY
-	 */
-	public int getBodyY() {
-		return bodyY;
-	}
-
-	/**
-	 * @param bodyY the bodyY to set
-	 */
-	public void setBodyY(int bodyY) {
-		this.bodyY = bodyY;
-	}
-
-	/**
-	 * @return the bodyW
-	 */
-	public int getBodyW() {
-		return bodyW;
-	}
-
-	/**
-	 * @param bodyW the bodyW to set
-	 */
-	public void setBodyW(int bodyW) {
-		this.bodyW = bodyW;
-	}
-
-	/**
-	 * @return the bodyH
-	 */
-	public int getBodyH() {
-		return bodyH;
-	}
-
-	/**
-	 * @param bodyH the bodyH to set
-	 */
-	public void setBodyH(int bodyH) {
-		this.bodyH = bodyH;
-	}
 
 
-	public class JointO {
+	public class Joint_Deprecate {
 		private int x; //positionX
 		private int y; //positionY
 		/**
 		 * @param x positionX
 		 * @param y positionY
 		 */
-		public JointO(int x, int y) {
+		public Joint_Deprecate(int x, int y) {
 			super();
 			this.x = x;
 			this.y = y;
@@ -114,7 +59,7 @@ public class Tester extends PApplet{
 		}
 	}
 	
-	public class Limbs {
+	public class Limbs_Deprecate {
 		private int r; //in Degrees
 		private int l; //length of limb
 		/**
@@ -145,7 +90,7 @@ public class Tester extends PApplet{
 		 * @param r angle, in degree
 		 * @param l length of limbs
 		 */
-		public Limbs(int r, int l) {
+		public Limbs_Deprecate(int r, int l) {
 			super();
 			this.r = r;
 			this.l = l;
@@ -153,8 +98,8 @@ public class Tester extends PApplet{
 		
 	}
 	
-	private ArrayList<Limbs> limbs = new ArrayList<Limbs>();
-	private ArrayList<JointO> jointO = new ArrayList<JointO>();
+	private ArrayList<Limbs_Deprecate> limbs = new ArrayList<Limbs_Deprecate>();
+	private ArrayList<Joint_Deprecate> joint = new ArrayList<Joint_Deprecate>();
 	
 
 	/* (non-Javadoc)
@@ -167,12 +112,17 @@ public class Tester extends PApplet{
 		this.background(0);
 		this.fill(0xff, 0x55, 0x00);
 		this.rect(bodyX,bodyY,bodyW,bodyH);
+		this.stroke(0xff, 0xff, 0);
+		
+		
 		
 		
 	}
 	
-	void drawLimbs(Limbs l){
-		int x = bodyX + l.l;
+	void drawLimbs(Limbs_Deprecate l, int x0, int y0){
+		int x = (int) (x0 + l.l*(Math.cos(Math.toRadians(l.r))));
+		int y = (int) (y0 - l.l*(Math.sin(Math.toRadians(l.r))));
+		this.line(x0, y0, x, y);
 	}
 	
 
@@ -184,15 +134,35 @@ public class Tester extends PApplet{
 		// TODO Auto-generated method stub
 		super.settings();
 		this.size(500, 500);
+		ArrayList<LimbsLower> lbL = new ArrayList<LimbsLower>();
+		ArrayList<LimbsUpper> lbU = new ArrayList<LimbsUpper>();
+		ArrayList<Joint> j0 = new ArrayList<Joint> ();
+		
+		j0.add(new Joint(200, 100));
+		j0.add(new Joint(200+100, 100));
+		j0.add(new Joint(200, 100+300));
+		j0.add(new Joint(200+100, 100+300));
+		for (int i=0;i<4;i++) {
+			lbU.add(new LimbsUpper(50, 270, j0.get(i)));
+			lbL.add(new LimbsLower(50, 270, lbU.get(i)));
+		}
+		
 		{
-			this.jointO.add(new JointO(200,100));
-			this.jointO.add(new JointO(300,100));
-			this.jointO.add(new JointO(200,400));
-			this.jointO.add(new JointO(300,400));
+			this.joint.add(new Joint_Deprecate(bodyX,bodyY));
+			this.joint.add(new Joint_Deprecate(bodyX+bodyW,bodyY));
+			this.joint.add(new Joint_Deprecate(bodyX,bodyY+bodyH));
+			this.joint.add(new Joint_Deprecate(bodyX+bodyW,bodyY+bodyH));
 		}
 		for (int i=0; i<8; i++)
 		{
-			this.limbs.add(new Limbs(270, 50));
+			this.limbs.add(new Limbs_Deprecate(270, 50));
+			this.joint.add
+			(new Joint_Deprecate((int)(joint.get(i).x + limbs.get(i).l * (Math.cos(Math.toRadians(limbs.get(i).r)))),
+					(int)(joint.get(i).y - limbs.get(i).l * (Math.sin(Math.toRadians(limbs.get(i).r))))));
+		}
+		
+		for (Joint_Deprecate j : this.joint){
+			System.out.println(j.x + " " + j.y);
 		}
 	}
 	
