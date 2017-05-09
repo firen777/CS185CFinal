@@ -37,6 +37,8 @@ public class LimbsUpper extends Limbs {
 	public int getX1() {
 		// TODO Auto-generated method stub
 		return (int) (j.getX() + l*Math.cos(Math.toRadians(r)));
+		
+		
 	}
 
 	@Override

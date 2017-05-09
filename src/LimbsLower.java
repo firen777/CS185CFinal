@@ -11,8 +11,9 @@ public class LimbsLower extends Limbs {
 	private LimbsUpper limb;
 
 	/**
-	 * @param r
-	 * @param l
+	 * @param r angle, in degree
+	 * @param l length
+	 * @param limb Upper Limb that Lower Limb based on
 	 */
 	public LimbsLower(int r, int l, LimbsUpper limb) {
 		super(r, l);
@@ -40,7 +41,7 @@ public class LimbsLower extends Limbs {
 	@Override
 	public int getY1() {
 		// TODO Auto-generated method stub
-		return (int) (limb.getY1() + l*Math.sin(Math.toRadians(r)));
+		return (int) (limb.getY1() - l*Math.sin(Math.toRadians(r)));
 	}
 
 }

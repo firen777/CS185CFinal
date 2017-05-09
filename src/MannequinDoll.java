@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * 
@@ -10,64 +11,64 @@ import processing.core.PApplet;
  * @author albertchan
  *
  */
-public class StickManDoll implements RagDoll {
-
+public class MannequinDoll implements RagDoll {
+	
 	private ArrayList<LimbsLower> lbL;
 	private ArrayList<LimbsUpper> lbU;
 	private ArrayList<Joint> j0;
-	
-	private int bodyX;
-	private int bodyY;
-	private int bodyW;
-	private int bodyH;
-	
-	private int colorR = 0xff;
-	private int colorG = 0xbe;
-	private int colorB = 0x89;
+	private ArrayList<PImage> limbsIMG;
+	private PImage torso;
+
 
 	/**<b>!!Referred to Mirrored image!!</b>
 	 * <br>order: left hand, right hand, left leg, right leg
 	 * @param lbL LowerLimbs 
 	 * @param lbU UpperLimbs
 	 * @param j0  Origin Joints
+	 * @param limbsIMG images for all limbs
+	 * @param torso image for the torso
 	 */
-	public StickManDoll(ArrayList<LimbsLower> lbL, ArrayList<LimbsUpper> lbU, ArrayList<Joint> j0) {
+	public MannequinDoll(ArrayList<LimbsLower> lbL, ArrayList<LimbsUpper> lbU, ArrayList<Joint> j0,
+			ArrayList<PImage> limbsIMG, PImage torso) {
 		super();
 		this.lbL = lbL;
 		this.lbU = lbU;
 		this.j0 = j0;
+		this.limbsIMG = limbsIMG;
+		this.torso = torso;
 		
-		this.bodyX = this.j0.get(0).getX();
-		this.bodyY = this.j0.get(0).getY();
-		this.bodyW = this.j0.get(3).getX()-this.bodyX;
-		this.bodyH = this.j0.get(3).getY()-this.bodyY;
+		int bodyW = (int) (torso.width*0.8);
+		int headH = torso.height/3;
+		j0.get(0).setY(headH);
+		j0.get(1).setY(headH);
+		j0.get(2).setY(torso.height);
+		j0.get(3).setY(torso.height);
 		
-//		for (LimbsLower l: this.lbL){
-//			System.out.println(l.getX0() + "," + l.getY0() + ":" + l.getX1() + "," + l.getY1());
-//		}
-		
+		j0.get(1).setX(j0.get(0).getX()+bodyW);
+		j0.get(3).setX(j0.get(2).getX()+bodyW);
 		
 	}
 
 	@Override
 	public void draw(PApplet p) {
-		// TODO Auto-generated method stub
-		p.stroke(colorR, colorG, colorB);
-		p.strokeWeight(5);
-		p.rect(bodyX, bodyY, bodyW, bodyH);
+		p.image(torso, j0.get(0).getX(), 0);
+		
+		int imgCounter = 0;
+		for (LimbsUpper l: this.lbU){
+			p.pushMatrix();
+			p.translate(l.getX0(), l.getY0());
+			p.rotate(p.radians(-l.getR())); //-l.getR() 
+			p.image(limbsIMG.get(imgCounter), 0, -limbsIMG.get(imgCounter).height/2);
+			p.popMatrix();
+			imgCounter++;
+		}
 		for (LimbsLower l: this.lbL){
 			p.pushMatrix();
 			p.translate(l.getX0(), l.getY0());
 			p.rotate(p.radians(-l.getR())); 
-			p.line(0, 0, l.getL(), 0);
+			p.image(limbsIMG.get(imgCounter), 0, -limbsIMG.get(imgCounter).height/2);
 			p.popMatrix();
-		}
-		for (LimbsUpper l: this.lbU){
-			p.pushMatrix();
-			p.translate(l.getX0(), l.getY0());
-			p.rotate(p.radians(-l.getR())); 
-			p.line(0, 0, l.getL(), 0);
-			p.popMatrix();
+			imgCounter++;
 		}
 
 	}
@@ -91,7 +92,5 @@ public class StickManDoll implements RagDoll {
 		}
 
 	}
-	
-	
 
 }
