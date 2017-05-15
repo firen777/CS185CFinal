@@ -11,7 +11,7 @@ import processing.core.PImage;
  * @author albertchan
  *
  */
-public class MannequinDoll implements RagDoll {
+public class MannequinDoll extends RagDollDancer{
 	
 	private ArrayList<LimbsLower> lbL;
 	private ArrayList<LimbsUpper> lbU;
@@ -49,6 +49,9 @@ public class MannequinDoll implements RagDoll {
 		
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void draw(PApplet p) {
 		p.image(torso, j0.get(0).getX(), 0);

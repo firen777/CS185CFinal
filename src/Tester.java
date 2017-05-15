@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -13,6 +14,7 @@ import processing.core.PImage;
  */
 public class Tester extends PApplet{
 	
+	private Minim minim;
 	private RagDoll doll;
 	private int translation[] = {1,-1,1,-1,-1,1,-1,1};
 	
@@ -25,7 +27,7 @@ public class Tester extends PApplet{
 		
 		background(0x00,0xff,0x00);
 		doll.draw(this);
-		doll.translation(translation);
+//		doll.translation(translation);
 		
 	}
 	
@@ -38,6 +40,7 @@ public class Tester extends PApplet{
 	public void settings() {
 		// TODO Auto-generated method stub
 		super.settings();
+		this.minim = new Minim(this);
 		this.size(600, 900);
 		ArrayList<LimbsLower> lbL = new ArrayList<LimbsLower>();
 		ArrayList<LimbsUpper> lbU = new ArrayList<LimbsUpper>();
@@ -70,8 +73,8 @@ public class Tester extends PApplet{
 			}
 		}
 		
-//		this.doll = new StickManDoll(lbL, lbU, j0);
-		this.doll = new MannequinDoll(lbL, lbU, j0, limbsIMG, torsoIMG);
+		this.doll = new StickManDoll(lbL, lbU, j0);
+//		this.doll = new MannequinDoll(lbL, lbU, j0, limbsIMG, torsoIMG);
 	}
 	
 	

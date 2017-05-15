@@ -10,7 +10,7 @@ import processing.core.PApplet;
  * @author albertchan
  *
  */
-public class StickManDoll implements RagDoll {
+public class StickManDoll extends RagDollDancer {
 
 	private ArrayList<LimbsLower> lbL;
 	private ArrayList<LimbsUpper> lbU;
