@@ -9,6 +9,8 @@ import processing.core.PApplet;
  *
  */
 public abstract class RagDollDancer implements RagDoll {
+	
+	protected int bmp;
 
 	/**
 	 * 
@@ -28,6 +30,8 @@ public abstract class RagDollDancer implements RagDoll {
 	 */
 	@Override
 	abstract public void translation(int[] data);
+	
+	
 	
 	public void dancing(){
 		//TODO
