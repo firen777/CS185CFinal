@@ -58,14 +58,14 @@ public class StickManDoll extends RagDollDancer {
 		for (LimbsLower l: this.lbL){
 			p.pushMatrix();
 			p.translate(l.getX0(), l.getY0());
-			p.rotate(p.radians(-l.getR())); 
+			p.rotate(PApplet.radians(-l.getR())); 
 			p.line(0, 0, l.getL(), 0);
 			p.popMatrix();
 		}
 		for (LimbsUpper l: this.lbU){
 			p.pushMatrix();
 			p.translate(l.getX0(), l.getY0());
-			p.rotate(p.radians(-l.getR())); 
+			p.rotate(PApplet.radians(-l.getR())); 
 			p.line(0, 0, l.getL(), 0);
 			p.popMatrix();
 		}

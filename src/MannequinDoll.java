@@ -60,7 +60,7 @@ public class MannequinDoll extends RagDollDancer{
 		for (LimbsUpper l: this.lbU){
 			p.pushMatrix();
 			p.translate(l.getX0(), l.getY0());
-			p.rotate(p.radians(-l.getR())); //-l.getR() 
+			p.rotate(PApplet.radians(-l.getR())); //-l.getR() 
 			p.image(limbsIMG.get(imgCounter), 0, -limbsIMG.get(imgCounter).height/2);
 			p.popMatrix();
 			imgCounter++;
@@ -68,7 +68,7 @@ public class MannequinDoll extends RagDollDancer{
 		for (LimbsLower l: this.lbL){
 			p.pushMatrix();
 			p.translate(l.getX0(), l.getY0());
-			p.rotate(p.radians(-l.getR())); 
+			p.rotate(PApplet.radians(-l.getR())); 
 			p.image(limbsIMG.get(imgCounter), 0, -limbsIMG.get(imgCounter).height/2);
 			p.popMatrix();
 			imgCounter++;
