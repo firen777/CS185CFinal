@@ -18,6 +18,10 @@ public class MannequinDoll extends RagDollDancer{
 	private ArrayList<Joint> j0;
 	private ArrayList<PImage> limbsIMG;
 	private PImage torso;
+	
+	public MannequinDoll(int w, int h, ArrayList<PImage> limbsIMG, PImage torso, ArrayList<Joint> j0){
+		
+	}
 
 
 	/**<b>!!Referred to Mirrored image!!</b>

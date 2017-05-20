@@ -26,7 +26,7 @@ public class Tester extends PApplet{
 		
 		background(0x00,0xff,0x00);
 		doll.draw(this);
-//		doll.translation(translation);
+		doll.translation(translation);
 		
 	}
 	
@@ -39,7 +39,7 @@ public class Tester extends PApplet{
 	public void settings() {
 		// TODO Auto-generated method stub
 		super.settings();
-		this.size(600, 900);
+		this.size(400, 600);
 		ArrayList<LimbsLower> lbL = new ArrayList<LimbsLower>();
 		ArrayList<LimbsUpper> lbU = new ArrayList<LimbsUpper>();
 		ArrayList<Joint> j0 = new ArrayList<Joint> ();
@@ -71,7 +71,8 @@ public class Tester extends PApplet{
 			}
 		}
 		
-		this.doll = new StickManDoll(lbL, lbU, j0);
+//		this.doll = new StickManDoll(lbL, lbU, j0);
+		this.doll = new StickManDoll(this.width,this.height);
 //		this.doll = new MannequinDoll(lbL, lbU, j0, limbsIMG, torsoIMG);
 	}
 	

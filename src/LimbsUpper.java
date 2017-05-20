@@ -11,8 +11,8 @@ public class LimbsUpper extends Limbs {
 	private Joint j;
 	
 	/**
-	 * @param r
-	 * @param l
+	 * @param r in degrees
+	 * @param l length
 	 * @param j Joint for origin
 	 */
 	public LimbsUpper(int r, int l, Joint j) {

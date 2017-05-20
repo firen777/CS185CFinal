@@ -45,8 +45,29 @@ public class StickManDoll extends RagDollDancer {
 //		for (LimbsLower l: this.lbL){
 //			System.out.println(l.getX0() + "," + l.getY0() + ":" + l.getX1() + "," + l.getY1());
 //		}
+	}
+	
+	public StickManDoll(int w, int h){
+		bodyW = h/6;
+		bodyH = h/3;
+		bodyX = w/2 - bodyW/2;
+		bodyY = h/2 - bodyH/2;
 		
+		j0 = new ArrayList<Joint>();
+		lbU = new ArrayList<LimbsUpper>();
+		lbL = new ArrayList<LimbsLower>();
 		
+		j0.add(new Joint(bodyX, bodyY));
+		j0.add(new Joint(bodyX+bodyW, bodyY));
+		j0.add(new Joint(bodyX, bodyY+bodyH));
+		j0.add(new Joint(bodyX+bodyW, bodyY+bodyH));
+		
+		for (Joint j: j0){
+			lbU.add(new LimbsUpper(270, bodyW, j));
+		}
+		for (LimbsUpper l: lbU){
+			lbL.add(new LimbsLower(270, bodyW, l));			
+		}
 	}
 
 	@Override
