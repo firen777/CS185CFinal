@@ -25,8 +25,6 @@ public class Tester extends PApplet{
 	BeatDetect beat;
 	FFT fft;
 	
-	int frameNUM = 0;
-	
 	double specLow = 0.03; // 3%
 	double specMid = 0.125;  // 12.5%
 	double specHi = 0.20;   // 20%
@@ -42,24 +40,34 @@ public class Tester extends PApplet{
 	
 	private RagDollDancer doll;
 	
+	float averageVolume = 0;
+	float newVolume = 0;
+	long samplesCount = 0;
+	
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void draw() {
-		background(0x00,0xff,0x00);
+		fft.forward(player.mix);	
+		for (int i=0;i<fft.specSize();i++){
+			newVolume+=fft.getBand(i);
+		}
+		averageVolume = averageVolume* (float)(samplesCount) / (float)(samplesCount+1) + newVolume / (float)(samplesCount+1);
+		samplesCount++;	
 		
-		frameNUM++;
-		fft.forward(player.mix);
-		
-		doll.draw(this);
-		
+
 		beat.detect(player.mix);
-		if (beat.isOnset()){
-			doll.onBeat(fft);
+		if (beat.isOnset()||newVolume>averageVolume){
+			if (beat.isOnset())
+				doll.onBeat(fft);
 		}
 		doll.dance();
+		
+		background(0x00,0xff,0x00);
+		doll.draw(this);
+		newVolume=0;
 	}
 	
 
