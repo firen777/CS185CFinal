@@ -1,6 +1,11 @@
+import java.io.File;
 import java.util.ArrayList;
 
-
+import ddf.minim.AudioMetaData;
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
+import ddf.minim.analysis.BeatDetect;
+import ddf.minim.analysis.FFT;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -14,35 +19,61 @@ import processing.core.PImage;
  */
 public class Tester extends PApplet{
 	
-	private RagDoll doll;
+	Minim minim;
+	AudioPlayer player;
+	AudioMetaData meta;
+	BeatDetect beat;
+	FFT fft;
+	
+	int frameNUM = 0;
+	
+	double specLow = 0.03; // 3%
+	double specMid = 0.125;  // 12.5%
+	double specHi = 0.20;   // 20%
+	
+	double scoreLow = 0;
+	double scoreMid = 0;
+	double scoreHi = 0;
+	
+	double oldScoreLow = scoreLow;
+	double oldScoreMid = scoreMid;
+	double oldScoreHi = scoreHi;
+
+	
+	private RagDollDancer doll;
 	private int translation[] = {1,-1,1,-1,-1,1,-1,1};
 	
 
-	/* (non-Javadoc)
-	 * @see processing.core.PApplet#draw()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void draw() {
-		
 		background(0x00,0xff,0x00);
+		
+		frameNUM++;
+		fft.forward(player.mix);
+		
 		doll.draw(this);
-		doll.translation(translation);
+		//doll.translation(translation);
+		
+		beat.detect(player.mix);
+		if (beat.isOnset()){
+			doll.dance(fft);
+		}
 		
 	}
 	
 
 	
-	/* (non-Javadoc)
-	 * @see processing.core.PApplet#settings()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void settings() {
-		// TODO Auto-generated method stub
+		// TODO MannequinDoll draw method revamp
 		super.settings();
 		this.size(400, 600);
-		ArrayList<LimbsLower> lbL = new ArrayList<LimbsLower>();
-		ArrayList<LimbsUpper> lbU = new ArrayList<LimbsUpper>();
-		ArrayList<Joint> j0 = new ArrayList<Joint> ();
 		ArrayList<PImage> limbsIMG = new ArrayList<PImage>();
 		PImage torsoIMG;
 		
@@ -52,28 +83,16 @@ public class Tester extends PApplet{
 		}
 		torsoIMG = this.loadImage("torso.png");
 		
-		//Joint Origin
-		j0.add(new Joint(200, 0));
-		j0.add(new Joint(200+235, 0));
-		j0.add(new Joint(200, 0+350));
-		j0.add(new Joint(200+235, 0+350));
-		//Limbs
-//		for (int i=0;i<4;i++) {
-//			lbU.add(new LimbsUpper(270, 100, j0.get(i)));
-//			lbL.add(new LimbsLower(270, 100, lbU.get(i)));
-//		}
-		
-		for (int i=0;i<8;i++) {
-			if (i<4) {
-				lbU.add(new LimbsUpper(270, limbsIMG.get(i).width, j0.get(i)));
-			} else {
-				lbL.add(new LimbsLower(270, limbsIMG.get(i).width, lbU.get(i%lbU.size())));
-			}
-		}
-		
-//		this.doll = new StickManDoll(lbL, lbU, j0);
 		this.doll = new StickManDoll(this.width,this.height);
 //		this.doll = new MannequinDoll(lbL, lbU, j0, limbsIMG, torsoIMG);
+		
+		//=====================Audio setup=============================//
+		minim = new Minim(this);
+		player = minim.loadFile("."+File.separator+"4.mp3"); //"+File.separator+"
+		meta = player.getMetaData();
+		beat = new BeatDetect();
+		fft = new FFT(player.bufferSize(), player.sampleRate());
+		player.play();
 	}
 	
 	
