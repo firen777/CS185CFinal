@@ -13,9 +13,6 @@ import processing.core.PImage;
  */
 public class MannequinDoll extends RagDollDancer{
 	
-	private ArrayList<LimbsLower> lbL;
-	private ArrayList<LimbsUpper> lbU;
-	private ArrayList<Joint> j0;
 	private ArrayList<PImage> limbsIMG;
 	private PImage torso;
 	
@@ -80,24 +77,5 @@ public class MannequinDoll extends RagDollDancer{
 
 	}
 
-	/** {@inheritDoc}
-	 *  <br>This version expect data array to be the <b>difference</b> of angle, in degree
-	 *  <br>order: upper left hand, right hand, left leg, right leg;
-	 *  <br>order: lower left hand, right hand, left leg, right leg.
-	 */
-	@Override
-	public void translation(int[] data) {
-		int i=0;
-		while (i<data.length){
-			if (i<4) {
-				this.lbL.get(i).setR((this.lbL.get(i).getR()+data[i])%360);
-			}
-			else {
-				this.lbU.get(i%4).setR((this.lbU.get(i%4).getR()+data[i])%360);
-			}
-			i++;
-		}
-
-	}
 
 }

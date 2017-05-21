@@ -20,5 +20,5 @@ public interface RagDoll {
 	 * <br>change the pose of the RagDoll based on the data array
 	 * @param data array of data for the translation in degrees.
 	 */
-	public void translation(int[] data);
+	public void translate(int[] data);
 }

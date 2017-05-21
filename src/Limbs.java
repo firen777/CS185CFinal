@@ -66,5 +66,11 @@ public abstract class Limbs {
 		this.l = l;
 	}
 	
+	/**translate R, in degrees
+	 * @param r
+	 */
+	public void addR(int r){
+		this.r = ((this.r + r)+360)%360;
+	}
 	
 }

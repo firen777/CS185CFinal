@@ -41,7 +41,6 @@ public class Tester extends PApplet{
 
 	
 	private RagDollDancer doll;
-	private int translation[] = {1,-1,1,-1,-1,1,-1,1};
 	
 
 	/**
@@ -55,13 +54,12 @@ public class Tester extends PApplet{
 		fft.forward(player.mix);
 		
 		doll.draw(this);
-		//doll.translation(translation);
 		
 		beat.detect(player.mix);
 		if (beat.isOnset()){
-			doll.dance(fft);
+			doll.onBeat(fft);
 		}
-		
+		doll.dance();
 	}
 	
 
@@ -88,7 +86,7 @@ public class Tester extends PApplet{
 		
 		//=====================Audio setup=============================//
 		minim = new Minim(this);
-		player = minim.loadFile("."+File.separator+"4.mp3"); //"+File.separator+"
+		player = minim.loadFile("1.mp3"); //"+File.separator+"
 		meta = player.getMetaData();
 		beat = new BeatDetect();
 		fft = new FFT(player.bufferSize(), player.sampleRate());

@@ -46,5 +46,19 @@ public class Joint {
 		this.y = y;
 	}
 	
+	/**translate x position
+	 * @param x
+	 */
+	public void addX(int x){
+		this.x += x;
+	}
+	
+	
+	/**translate y position
+	 * @param y
+	 */
+	public void addY(int y){
+		this.y += y;
+	}
 
 }

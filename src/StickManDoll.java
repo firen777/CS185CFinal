@@ -11,15 +11,6 @@ import processing.core.PApplet;
  *
  */
 public class StickManDoll extends RagDollDancer {
-
-	private ArrayList<LimbsLower> lbL;
-	private ArrayList<LimbsUpper> lbU;
-	private ArrayList<Joint> j0;
-	
-	private int bodyX;
-	private int bodyY;
-	private int bodyW;
-	private int bodyH;
 	
 	private int colorR = 0xff;
 	private int colorG = 0xbe;
@@ -47,6 +38,11 @@ public class StickManDoll extends RagDollDancer {
 //		}
 	}
 	
+	
+	/**Construct a doll in proportion of the canvas height
+	 * @param w: width of canvas
+	 * @param h: height of canvas
+	 */
 	public StickManDoll(int w, int h){
 		bodyW = h/6;
 		bodyH = h/3;
@@ -93,25 +89,7 @@ public class StickManDoll extends RagDollDancer {
 
 	}
 
-	/** {@inheritDoc}
-	 *  <br>This version expect data array to be the <b>difference</b> of angle, in degree
-	 *  <br>order: upper left hand, right hand, left leg, right leg;
-	 *  <br>order: lower left hand, right hand, left leg, right leg.
-	 */
-	@Override
-	public void translation(int[] data) {
-		int i=0;
-		while (i<data.length){
-			if (i<4) {
-				this.lbL.get(i).setR((this.lbL.get(i).getR()+data[i])%360);
-			}
-			else {
-				this.lbU.get(i%4).setR((this.lbU.get(i%4).getR()+data[i])%360);
-			}
-			i++;
-		}
-
-	}
+	
 	
 	
 
