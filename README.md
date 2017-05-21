@@ -1,6 +1,12 @@
 # CS185CFinal
 CS185CFinal
 
+<p>
+API:
+<a href="https://processing.org/">Processing 3</a> <br>
+<a href="https://github.com/ddf/Minim">ddf.Minim</a>
+</p>
+
 Dependancy:<br>
 (https://processing.org/tutorials/eclipse/)
 core.jar
@@ -18,7 +24,4 @@ PApplet.main(new String[] {"NameOfClass"}); <br>
 Music visualizations: 
 <br>https://github.com/blyk/Music-Visualization
 <br>https://github.com/samuellapointe/ProcessingCubes
-</p>
-<p>Stickman example:
-<br>http://studio.processingtogether.com/sp/pad/export/ro.9ozYNbweyOpjT/latest
 </p>
