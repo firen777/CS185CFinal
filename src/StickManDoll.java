@@ -80,6 +80,7 @@ public class StickManDoll extends RagDollDancer {
 			p.line(0, 0, l.getL(), 0);
 			p.popMatrix();
 		}
+		p.stroke(0xff, 0, 0);
 		for (LimbsUpper l: this.lbU){
 			p.pushMatrix();
 			p.translate(l.getX0(), l.getY0());

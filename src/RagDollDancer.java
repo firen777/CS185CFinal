@@ -18,8 +18,8 @@ public abstract class RagDollDancer implements RagDoll {
 	protected int[] oldPose;
 	protected int[] currentPose;
 	
-	protected ArrayList<LimbsLower> lbL;
-	protected ArrayList<LimbsUpper> lbU;
+	protected ArrayList<LimbsLower> lbL; //Lower is Outer
+	protected ArrayList<LimbsUpper> lbU; //Upper is Inner
 	protected ArrayList<Joint> j0;
 	
 	protected int bodyX;

@@ -59,7 +59,8 @@ public class Tester extends PApplet{
 		
 
 		beat.detect(player.mix);
-		if (beat.isOnset())
+		//if (beat.isOnset()) //sound energy mode
+		if (beat.isHat())   //fq energy mode
 			doll.onBeat(fft);
 		
 		doll.dance();
@@ -93,9 +94,10 @@ public class Tester extends PApplet{
 		
 		//=====================Audio setup=============================//
 		minim = new Minim(this);
-		player = minim.loadFile("1.mp3"); //"+File.separator+"
+		player = minim.loadFile("5.mp3"); //"+File.separator+"
 		meta = player.getMetaData();
-		beat = new BeatDetect();
+//		beat = new BeatDetect(); //sound energy mode
+		beat = new BeatDetect(player.bufferSize(),player.sampleRate()); //fq energy mode
 
 		fft = new FFT(player.bufferSize(), player.sampleRate());
 		player.play();

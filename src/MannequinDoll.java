@@ -50,7 +50,17 @@ public class MannequinDoll extends RagDollDancer{
 		j0.get(3).setX(j0.get(2).getX()+bodyW);
 	}
 	
-	
+	/**
+	 * @param w
+	 * @param h
+	 * @param x
+	 * @param y
+	 * @param limbsIMG
+	 * @param torso
+	 */
+	public MannequinDoll(int w, int h, int[]x, int[]y, ArrayList<PImage> limbsIMG, PImage torso){
+		super();
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -60,14 +70,6 @@ public class MannequinDoll extends RagDollDancer{
 		p.image(torso, j0.get(0).getX(), 0);
 		
 		int imgCounter = 0;
-		for (LimbsUpper l: this.lbU){
-			p.pushMatrix();
-			p.translate(l.getX0(), l.getY0());
-			p.rotate(PApplet.radians(-l.getR())); //-l.getR() 
-			p.image(limbsIMG.get(imgCounter), 0, -limbsIMG.get(imgCounter).height/2);
-			p.popMatrix();
-			imgCounter++;
-		}
 		for (LimbsLower l: this.lbL){
 			p.pushMatrix();
 			p.translate(l.getX0(), l.getY0());
@@ -76,7 +78,14 @@ public class MannequinDoll extends RagDollDancer{
 			p.popMatrix();
 			imgCounter++;
 		}
-
+		for (LimbsUpper l: this.lbU){
+			p.pushMatrix();
+			p.translate(l.getX0(), l.getY0());
+			p.rotate(PApplet.radians(-l.getR())); //-l.getR() 
+			p.image(limbsIMG.get(imgCounter), 0, -limbsIMG.get(imgCounter).height/2);
+			p.popMatrix();
+			imgCounter++;
+		}
 	}
 
 

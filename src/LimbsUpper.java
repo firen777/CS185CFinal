@@ -4,6 +4,7 @@
 
 /**
  * @author albertchan
+ * <br>AKA Inner Limbs
  *
  */
 public class LimbsUpper extends Limbs {

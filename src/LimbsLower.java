@@ -4,7 +4,7 @@
 
 /**
  * @author albertchan
- *
+ * <br>AKA Outer Limbs
  */
 public class LimbsLower extends Limbs {
 	
