@@ -1,7 +1,7 @@
 import java.io.File;
 import java.util.ArrayList;
 
-import ddf.minim.AudioMetaData;
+//import ddf.minim.AudioMetaData;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ddf.minim.analysis.BeatDetect;
@@ -21,7 +21,7 @@ public class Tester extends PApplet{
 	
 	Minim minim;
 	AudioPlayer player;
-	AudioMetaData meta;
+//	AudioMetaData meta;
 	BeatDetect beat;
 	FFT fft;
 	
@@ -79,7 +79,21 @@ public class Tester extends PApplet{
 	public void settings() {
 		// TODO MannequinDoll draw method revamp
 		super.settings();
-		this.size(400, 600);
+		this.size(1280, 720);
+		
+		
+		loadStickMan();
+		
+		//=====================Audio setup=============================//
+		minim = new Minim(this);
+		player = minim.loadFile("1.mp3");
+		loadMusicAndPlay(1);
+	}
+	
+	private void loadStickMan(){
+		this.doll = new StickManDoll(this.width,this.height);
+	}
+	private void loadMannequin(){
 		ArrayList<PImage> limbsIMG = new ArrayList<PImage>();
 		PImage torsoIMG;
 		
@@ -89,13 +103,16 @@ public class Tester extends PApplet{
 		}
 		torsoIMG = this.loadImage("torso.png");
 		
-		this.doll = new StickManDoll(this.width,this.height);
-//		this.doll = new MannequinDoll(lbL, lbU, j0, limbsIMG, torsoIMG);
+		int xList[] = new int[] {49,171,74,146};
+		int yList[] = new int[] {157,157,316,316};
 		
-		//=====================Audio setup=============================//
-		minim = new Minim(this);
-		player = minim.loadFile("5.mp3"); //"+File.separator+"
-		meta = player.getMetaData();
+		this.doll = new MannequinDoll(this.width, this.height, xList, yList, limbsIMG, torsoIMG);
+	}
+	
+	private void loadMusicAndPlay(int name) {
+		if (player.isPlaying())
+			player.pause();
+		player = minim.loadFile(name + ".mp3"); //"+File.separator+"
 //		beat = new BeatDetect(); //sound energy mode
 		beat = new BeatDetect(player.bufferSize(),player.sampleRate()); //fq energy mode
 
@@ -103,7 +120,30 @@ public class Tester extends PApplet{
 		player.play();
 	}
 	
-	
+	@Override
+	public void keyPressed() {
+		switch (this.key) {
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+			loadMusicAndPlay(Character.getNumericValue(this.key));
+			break;
+		case 'n':
+			this.loadStickMan();
+			break;
+		case 'm':
+			this.loadMannequin();
+			break;
+		default:
+		}
+	}
+
+
+
 	/**
 	 * @param args
 	 */

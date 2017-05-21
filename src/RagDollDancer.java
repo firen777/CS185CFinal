@@ -44,18 +44,18 @@ public abstract class RagDollDancer implements RagDoll {
 
 	/** {@inheritDoc}
 	 *  <br>This version expect data array to be the <b>difference</b> of angle, in degree
-	 *  <br>order: outer left hand, right hand, left leg, right leg;
-	 *  <br>order: inner left hand, right hand, left leg, right leg.
+	 *  <br>order: inner left hand, right hand, left leg, right leg;
+	 *  <br>order: outer left hand, right hand, left leg, right leg.
 	 */
 	@Override
 	public void translate(int[] data) {
 		int i=0;
 		while (i<data.length){
 			if (i<4) {
-				this.lbL.get(i).addR(data[i]);
+				this.lbU.get(i).addR(data[i]);
 			}
 			else {
-				this.lbU.get(i%4).addR(data[i]);
+				this.lbL.get(i%4).addR(data[i]);
 			}
 			i++;
 		}
@@ -84,30 +84,30 @@ public abstract class RagDollDancer implements RagDoll {
 			hi += fft.getBand(i);
 		
 		/* 
-		 *  <br>order: outer left hand, right hand, left leg, right leg;
-		 *  <br>order: inner left hand, right hand, left leg, right leg.
+		 *  <br>order: inner left hand, right hand, left leg, right leg;
+		 *  <br>order: outer left hand, right hand, left leg, right leg.
 		 */
 		int loI = (int)lo;
 		int miI = (int)mi;
 		int hiI = (int)hi;
 		
 		Random r = new Random();
-		newPose[0] = (oldPose[0] + (r.nextInt((hiI+1)*2)-hiI)*3 +360)%360; //L out hand
-		newPose[1] = (oldPose[1] - (r.nextInt((hiI+1)*2)-hiI)*3 +360)%360; //R out hand
-		newPose[2] = (oldPose[2] + (r.nextInt((loI+1)*2)-loI)%60 +360)%360; //L out leg
-		newPose[3] = (oldPose[3] - (r.nextInt((loI+1)*2)-loI)%60 +360)%360; //R out leg
-		newPose[4] = (oldPose[4] + (r.nextInt((miI+1)*2)-miI)%120 +360)%360; //L in hand
-		newPose[5] = (oldPose[5] - (r.nextInt((miI+1)*2)-miI)%120 +360)%360; //R in hand
-		newPose[6] = (oldPose[6] + (r.nextInt((miI+1)*2)-miI)%60 +360)%360; //L in leg
-		newPose[7] = (oldPose[7] - (r.nextInt((miI+1)*2)-miI)%60 +360)%360; //R in leg
+		newPose[0] = (oldPose[0] + (r.nextInt((miI+1)*2)-miI)%120 +360)%360; //L in hand
+		newPose[1] = (oldPose[1] - (r.nextInt((miI+1)*2)-miI)%120 +360)%360; //R in hand
+		newPose[2] = (oldPose[2] + (r.nextInt((miI+1)*2)-miI)%60 +360)%360; //L in leg
+		newPose[3] = (oldPose[3] - (r.nextInt((miI+1)*2)-miI)%60 +360)%360; //R in leg
+		newPose[4] = (oldPose[4] + (r.nextInt((hiI+1)*2)-hiI)*3 +360)%360; //L out hand
+		newPose[5] = (oldPose[5] - (r.nextInt((hiI+1)*2)-hiI)*3 +360)%360; //R out hand
+		newPose[6] = (oldPose[6] + (r.nextInt((loI+1)*2)-loI)%60 +360)%360; //L out leg
+		newPose[7] = (oldPose[7] - (r.nextInt((loI+1)*2)-loI)%60 +360)%360; //R out leg
 		
 //		for (int i=4; i<8; i++){
 //			if (newPose[i]<180){
 //				newPose[i]+=180;
 //			}
 //		}
-		if (newPose[4]<=180) newPose[4]+=180;
-		if (newPose[5]<=180) newPose[5]+=180;
+		if (newPose[0]<=70) newPose[0]+=180;
+		if (110<=newPose[1]&&newPose[1]<=180) newPose[1]+=180;
 //		if (newPose[6]<=120) newPose[6]+=180;
 //		if (30<=newPose[7]&&newPose[7]<=180) newPose[7]= (newPose[7]+180)%360;
 		
@@ -123,10 +123,10 @@ public abstract class RagDollDancer implements RagDoll {
 		int [] translation = new int[8];
 		for (int i=0; i<8; i++){
 			if (i<4) {
-				currentPose[i]=lbL.get(i).getR();
+				currentPose[i]=lbU.get(i).getR();
 			}
 			else{
-				currentPose[i]=lbU.get(i%4).getR();
+				currentPose[i]=lbL.get(i%4).getR();
 			}
 			translation[i] = (newPose[i]-currentPose[i])/4;
 		}
