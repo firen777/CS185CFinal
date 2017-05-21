@@ -59,10 +59,9 @@ public class Tester extends PApplet{
 		
 
 		beat.detect(player.mix);
-		if (beat.isOnset()||newVolume>averageVolume){
-			if (beat.isOnset())
-				doll.onBeat(fft);
-		}
+		if (beat.isOnset())
+			doll.onBeat(fft);
+		
 		doll.dance();
 		
 		background(0x00,0xff,0x00);
@@ -97,6 +96,7 @@ public class Tester extends PApplet{
 		player = minim.loadFile("1.mp3"); //"+File.separator+"
 		meta = player.getMetaData();
 		beat = new BeatDetect();
+
 		fft = new FFT(player.bufferSize(), player.sampleRate());
 		player.play();
 	}

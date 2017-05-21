@@ -28,6 +28,7 @@ public class MannequinDoll extends RagDollDancer{
 	 * @param j0  Origin Joints
 	 * @param limbsIMG images for all limbs
 	 * @param torso image for the torso
+	 * @deprecated
 	 */
 	public MannequinDoll(ArrayList<LimbsLower> lbL, ArrayList<LimbsUpper> lbU, ArrayList<Joint> j0,
 			ArrayList<PImage> limbsIMG, PImage torso) {
@@ -47,8 +48,9 @@ public class MannequinDoll extends RagDollDancer{
 		
 		j0.get(1).setX(j0.get(0).getX()+bodyW);
 		j0.get(3).setX(j0.get(2).getX()+bodyW);
-		
 	}
+	
+	
 
 	/**
 	 * {@inheritDoc}

@@ -71,7 +71,7 @@ public abstract class Limbs {
 	 */
 	public void addR(int r){
 		if (r!=0){
-			this.r = ((this.r + r)+360)%360;
+			this.r = ((this.r + r))%360;
 		}
 	}
 	

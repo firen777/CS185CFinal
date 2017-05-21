@@ -92,20 +92,25 @@ public abstract class RagDollDancer implements RagDoll {
 		int hiI = (int)hi;
 		
 		Random r = new Random();
-		newPose[0] = (oldPose[0] + r.nextInt(hiI+1)*7 +360)%360; //L out hand
-		newPose[1] = (oldPose[1] - r.nextInt(hiI+1)*7 +360)%360; //R out hand
-		newPose[2] = (oldPose[2] + r.nextInt(loI+1)%60 +360)%360; //L out leg
-		newPose[3] = (oldPose[3] - r.nextInt(loI+1)%60 +360)%360; //R out leg
-		newPose[4] = (oldPose[4] + r.nextInt(miI+1)%120 +360)%360; //L in hand
-		newPose[5] = (oldPose[5] - r.nextInt(miI+1)%120 +360)%360; //R in hand
-		newPose[6] = (oldPose[6] + r.nextInt(miI+1)%60 +360)%360; //L in leg
-		newPose[7] = (oldPose[7] - r.nextInt(miI+1)%60 +360)%360; //R in leg
+		newPose[0] = (oldPose[0] + (r.nextInt((hiI+1)*2)-hiI)*3 +360)%360; //L out hand
+		newPose[1] = (oldPose[1] - (r.nextInt((hiI+1)*2)-hiI)*3 +360)%360; //R out hand
+		newPose[2] = (oldPose[2] + (r.nextInt((loI+1)*2)-loI)%60 +360)%360; //L out leg
+		newPose[3] = (oldPose[3] - (r.nextInt((loI+1)*2)-loI)%60 +360)%360; //R out leg
+		newPose[4] = (oldPose[4] + (r.nextInt((miI+1)*2)-miI)%120 +360)%360; //L in hand
+		newPose[5] = (oldPose[5] - (r.nextInt((miI+1)*2)-miI)%120 +360)%360; //R in hand
+		newPose[6] = (oldPose[6] + (r.nextInt((miI+1)*2)-miI)%60 +360)%360; //L in leg
+		newPose[7] = (oldPose[7] - (r.nextInt((miI+1)*2)-miI)%60 +360)%360; //R in leg
 		
-		for (int i=4; i<8; i++){
-			if (newPose[i]<180){
-				newPose[i]+=180;
-			}
-		}
+//		for (int i=4; i<8; i++){
+//			if (newPose[i]<180){
+//				newPose[i]+=180;
+//			}
+//		}
+		if (newPose[4]<=180) newPose[4]+=180;
+		if (newPose[5]<=180) newPose[5]+=180;
+//		if (newPose[6]<=120) newPose[6]+=180;
+//		if (30<=newPose[7]&&newPose[7]<=180) newPose[7]= (newPose[7]+180)%360;
+		
 //		System.out.println("");
 		
 //		System.out.println(-90%360);
@@ -123,10 +128,8 @@ public abstract class RagDollDancer implements RagDoll {
 			else{
 				currentPose[i]=lbU.get(i%4).getR();
 			}
-			translation[i] = (newPose[i]-currentPose[i])/3;
-//			System.out.print(translation[i] + " ");
+			translation[i] = (newPose[i]-currentPose[i])/4;
 		}
-//		System.out.println("");
 		this.translate(translation);
 		
 //		for (int i: currentPose){

@@ -21,6 +21,7 @@ public class StickManDoll extends RagDollDancer {
 	 * @param lbL LowerLimbs 
 	 * @param lbU UpperLimbs
 	 * @param j0  Origin Joints
+	 * @deprecated
 	 */
 	public StickManDoll(ArrayList<LimbsLower> lbL, ArrayList<LimbsUpper> lbU, ArrayList<Joint> j0) {
 		super();
