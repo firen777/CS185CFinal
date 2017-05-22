@@ -25,3 +25,13 @@ Music visualizations:
 <br>https://github.com/blyk/Music-Visualization
 <br>https://github.com/samuellapointe/ProcessingCubes
 </p>
+
+<p>
+Co-Author: Nathan Tseng
+</p>
+
+<p>
+Special thanks to Toby Fox for creating the phenomenal game Undertale, 
+<br>for being part of the inspiration of this project,
+<br>as well as the awesome art assets for testing purposes.
+</p>
