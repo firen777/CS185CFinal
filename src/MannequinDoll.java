@@ -72,8 +72,6 @@ public class MannequinDoll extends RagDollDancer{
 		this.lbU= new ArrayList<LimbsUpper>();
 		this.lbL= new ArrayList<LimbsLower>();
 		
-		int x1[] = new int[4];
-		int y1[] = new int[4];
 		
 		torsoIMGX = w/2-torsoIMG.width/2;
 		torsoIMGY = h/2-torsoIMG.height/2 - 100;
