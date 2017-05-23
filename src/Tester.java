@@ -129,6 +129,9 @@ public class Tester extends PApplet{
 		case '5':
 		case '6':
 		case '7':
+		case '8':
+		case '9':
+		case '0':
 			loadMusicAndPlay(Character.getNumericValue(this.key));
 			break;
 		case 'n':
